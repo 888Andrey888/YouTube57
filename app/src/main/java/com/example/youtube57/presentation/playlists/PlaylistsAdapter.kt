@@ -14,7 +14,7 @@ internal class PlaylistsAdapter:RecyclerView.Adapter<PlaylistsAdapter.PlaylistsV
     private var _list = mutableListOf<PlaylistsModel.Item>()
     private val list get() = _list
 
-    fun addData(playlistModelItem:List<PlaylistsModel.Item>){
+    fun addData(playlistModelItem: List<PlaylistsModel.Item>) {
         _list.clear()
         _list.addAll(playlistModelItem)
         notifyItemRangeInserted(_list.size, playlistModelItem.size - _list.size)
