@@ -1,57 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/container_img_video"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="120dp"
-        app:cardCornerRadius="@dimen/_4dp"
+        android:layout_height="@dimen/_80dp"
         android:layout_marginStart="@dimen/_16dp"
         android:layout_marginTop="@dimen/_16dp"
-        android:layout_height="@dimen/_80dp">
+        app:cardCornerRadius="@dimen/_4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:id="@+id/img_video"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:importantForAccessibility="no"
+                android:scaleType="fitXY"
                 android:src="@color/grey"
-                android:importantForAccessibility="no" />
-
-            <ImageView
-                android:id="@+id/img_transparent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:src="@color/black_transparent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/img_transparent"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_24dp"
-                android:importantForAccessibility="no" />
+                android:importantForAccessibility="no"
+                android:src="@color/black_transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/tv_in_img_playlist"
-                app:layout_constraintTop_toTopOf="@id/img_transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_52dp"
+                android:text="@string/playlist"
+                android:textColor="@color/white"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@id/img_transparent"
                 app:layout_constraintStart_toStartOf="@id/img_transparent"
-                android:layout_marginStart="@dimen/_52dp"
-                android:textColor="@color/white"
-                android:text="@string/playlist"
-                android:textSize="12sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintTop_toTopOf="@id/img_transparent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -60,29 +61,29 @@
 
     <TextView
         android:id="@+id/tv_playlist_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/container_img_video"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8dp"
         android:layout_marginTop="@dimen/_25dp"
+        android:layout_marginEnd="@dimen/_16dp"
+        android:fontFamily="sans-serif-condensed"
         android:textColor="@color/black"
         android:textSize="@dimen/_16sp"
         android:textStyle="bold"
-        android:layout_marginStart="@dimen/_8dp"
-        android:layout_width="@dimen/_0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-condensed"
-        tools:text="Emotional Well-being Healing Practices for Children"
-        android:layout_marginEnd="@dimen/_16dp"/>
-    
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/container_img_video"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Emotional Well-being Healing Practices for Children" />
+
     <TextView
         android:id="@+id/tv_playlist_video_count"
         android:layout_width="@dimen/_0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/tv_playlist_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="32 video series"
-        app:layout_constraintTop_toBottomOf="@id/tv_playlist_name"
+        android:layout_marginEnd="@dimen/_16dp"
         android:textSize="@dimen/_12sp"
-        android:layout_marginEnd="@dimen/_16dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_playlist_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_playlist_name"
+        tools:text="32 video series" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

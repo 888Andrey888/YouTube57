@@ -19,7 +19,7 @@ android {
         buildConfigField(
             "String",
             "API_KEY",
-            "\"AIzaSyBqWkHk9C8ucYhl2N-k_fw2Zbg0nfo1UWc\""
+            "\"AIzaSyA3t6SVw_ApFq_e1SqMS1wTZdbNX_X6nRA\""
         )
         buildConfigField(
             "String",

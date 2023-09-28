@@ -1,4 +1,4 @@
-package com.slottica.reviewfueatures.youtube57_3.domain.repository
+package com.example.youtube57.domain.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,7 +19,7 @@ internal class Repository(private val apiService: ApiService) {
 			part = Constants.PART,
 			channelId = Constants.CHANNEL_ID,
 			apiKey = BuildConfig.API_KEY,
-			maxResult = 10,
+			maxResults = 10,
 		).enqueue(
 			object : Callback<PlaylistsModel> {
 				override fun onResponse(

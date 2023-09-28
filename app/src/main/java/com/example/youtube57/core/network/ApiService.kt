@@ -12,6 +12,6 @@ internal interface ApiService {
         @Query("part") part: String,
         @Query("key") apiKey: String,
         @Query("channelId") channelId: String,
-        @Query("maxResult") maxResult: Int
+        @Query("maxResults") maxResults: Int
     ):Call<PlaylistsModel>
 }
