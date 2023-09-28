@@ -1,24 +1,24 @@
 package com.example.youtube57.data.model
 
-internal data class PlaylistsModel(
+data class PlaylistsModel(
     val etag: String,
     val items: List<Item>,
     val kind: String,
     val nextPageToken: String,
     val pageInfo: PageInfo
 ) {
-    internal data class Item(
+    data class Item(
         val contentDetails: ContentDetails,
         val etag: String,
         val id: String,
         val kind: String,
         val snippet: Snippet
     ) {
-        internal data class ContentDetails(
+        data class ContentDetails(
             val itemCount: Int
         )
 
-        internal data class Snippet(
+        data class Snippet(
             val channelId: String,
             val channelTitle: String,
             val description: String,
@@ -27,43 +27,43 @@ internal data class PlaylistsModel(
             val thumbnails: Thumbnails,
             val title: String
         ) {
-            internal data class Localized(
+            data class Localized(
                 val description: String,
                 val title: String
             )
 
-            internal data class Thumbnails(
+            data class Thumbnails(
                 val default: Default,
                 val high: High,
                 val maxres: Maxres,
                 val medium: Medium,
                 val standard: Standard
             ) {
-                internal data class Default(
+                data class Default(
                     val height: Int,
                     val url: String,
                     val width: Int
                 )
 
-                internal data class High(
+                data class High(
                     val height: Int,
                     val url: String,
                     val width: Int
                 )
 
-                internal data class Maxres(
+                data class Maxres(
                     val height: Int,
                     val url: String,
                     val width: Int
                 )
 
-                internal data class Medium(
+                data class Medium(
                     val height: Int,
                     val url: String,
                     val width: Int
                 )
 
-                internal data class Standard(
+                data class Standard(
                     val height: Int,
                     val url: String,
                     val width: Int
@@ -72,7 +72,7 @@ internal data class PlaylistsModel(
         }
     }
 
-    internal data class PageInfo(
+    data class PageInfo(
         val resultsPerPage: Int,
         val totalResults: Int
     )

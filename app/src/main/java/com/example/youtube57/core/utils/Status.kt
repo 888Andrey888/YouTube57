@@ -1,7 +1,7 @@
-package com.slottica.reviewfueatures.youtube57_3.core.utils
+package com.example.youtube57.core.utils
 
 enum class Status {
-	SUCCESS,
-	ERROR,
-	LOADING
+    SUCCESS,
+    ERROR,
+    LOADING
 }

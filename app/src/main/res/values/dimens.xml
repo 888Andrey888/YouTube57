@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="_16dp">16dp</dimen>
-    <dimen name="_4dp">4dp</dimen>
-    <dimen name="_80dp">80dp</dimen>
-    <dimen name="_24dp">24dp</dimen>
-    <dimen name="_16sp">16sp</dimen>
-    <dimen name="_25dp">25dp</dimen>
-    <dimen name="_52dp">52dp</dimen>
-    <dimen name="_0dp">0dp</dimen>
-    <dimen name="_8dp">8dp</dimen>
-    <dimen name="_12sp">12sp</dimen>
+    <dimen name="default_indentation">16dp</dimen>
+    <dimen name="indentation_4dp">4dp</dimen>
+    <dimen name="cardview_height">80dp</dimen>
+    <dimen name="img_transparent_height">24dp</dimen>
+    <dimen name="default_text_size">16sp</dimen>
+    <dimen name="indentation_25dp">25dp</dimen>
+    <dimen name="indentation_52dp">52dp</dimen>
+    <dimen name="match_constraint">0dp</dimen>
+    <dimen name="small_indentation">8dp</dimen>
+    <dimen name="small_text_size">12sp</dimen>
+    <dimen name="cardview_width">120dp</dimen>
+    <dimen name="img_no_connection_width">240dp</dimen>
+    <dimen name="img_no_connection_height">276dp</dimen>
+    <dimen name="large_indentation">32dp</dimen>
+    <dimen name="button_radius">4dp</dimen>
 </resources>

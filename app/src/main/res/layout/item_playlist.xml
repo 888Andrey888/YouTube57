@@ -8,11 +8,11 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/container_img_video"
-        android:layout_width="120dp"
-        android:layout_height="@dimen/_80dp"
-        android:layout_marginStart="@dimen/_16dp"
-        android:layout_marginTop="@dimen/_16dp"
-        app:cardCornerRadius="@dimen/_4dp"
+        android:layout_width="@dimen/cardview_width"
+        android:layout_height="@dimen/cardview_height"
+        android:layout_marginStart="@dimen/default_indentation"
+        android:layout_marginTop="@dimen/default_indentation"
+        app:cardCornerRadius="@dimen/indentation_4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -35,7 +35,7 @@
             <ImageView
                 android:id="@+id/img_transparent"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_24dp"
+                android:layout_height="@dimen/img_transparent_height"
                 android:importantForAccessibility="no"
                 android:src="@color/black_transparent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -46,10 +46,10 @@
                 android:id="@+id/tv_in_img_playlist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_52dp"
+                android:layout_marginStart="@dimen/indentation_52dp"
                 android:text="@string/playlist"
                 android:textColor="@color/white"
-                android:textSize="12sp"
+                android:textSize="@dimen/small_text_size"
                 app:layout_constraintBottom_toBottomOf="@id/img_transparent"
                 app:layout_constraintStart_toStartOf="@id/img_transparent"
                 app:layout_constraintTop_toTopOf="@id/img_transparent" />
@@ -61,14 +61,14 @@
 
     <TextView
         android:id="@+id/tv_playlist_name"
-        android:layout_width="@dimen/_0dp"
+        android:layout_width="@dimen/match_constraint"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_8dp"
-        android:layout_marginTop="@dimen/_25dp"
-        android:layout_marginEnd="@dimen/_16dp"
+        android:layout_marginStart="@dimen/small_indentation"
+        android:layout_marginTop="@dimen/indentation_25dp"
+        android:layout_marginEnd="@dimen/default_indentation"
         android:fontFamily="sans-serif-condensed"
         android:textColor="@color/black"
-        android:textSize="@dimen/_16sp"
+        android:textSize="@dimen/default_text_size"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/container_img_video"
@@ -77,10 +77,10 @@
 
     <TextView
         android:id="@+id/tv_playlist_video_count"
-        android:layout_width="@dimen/_0dp"
+        android:layout_width="@dimen/match_constraint"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_16dp"
-        android:textSize="@dimen/_12sp"
+        android:layout_marginEnd="@dimen/default_indentation"
+        android:textSize="@dimen/small_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/tv_playlist_name"
         app:layout_constraintTop_toBottomOf="@id/tv_playlist_name"

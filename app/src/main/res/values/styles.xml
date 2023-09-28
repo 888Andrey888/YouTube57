@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Base.Button" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/orange</item>
+        <item name="android:textSize">@dimen/default_text_size</item>
+        <item name="cornerRadius">@dimen/button_radius</item>
+    </style>
+</resources>

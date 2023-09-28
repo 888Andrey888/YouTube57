@@ -9,7 +9,7 @@ import coil.load
 import com.example.youtube57.data.model.PlaylistsModel
 import com.example.youtube57.databinding.ItemPlaylistBinding
 
-internal class PlaylistsAdapter:RecyclerView.Adapter<PlaylistsAdapter.PlaylistsViewHolder>() {
+internal class PlaylistsAdapter : RecyclerView.Adapter<PlaylistsAdapter.PlaylistsViewHolder>() {
 
     private var _list = mutableListOf<PlaylistsModel.Item>()
     private val list get() = _list
@@ -21,7 +21,13 @@ internal class PlaylistsAdapter:RecyclerView.Adapter<PlaylistsAdapter.PlaylistsV
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistsViewHolder {
-        return PlaylistsViewHolder(ItemPlaylistBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return PlaylistsViewHolder(
+            ItemPlaylistBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int = list.size
@@ -30,12 +36,14 @@ internal class PlaylistsAdapter:RecyclerView.Adapter<PlaylistsAdapter.PlaylistsV
         holder.toBind(list[position])
     }
 
-    inner class PlaylistsViewHolder(private val binding:ItemPlaylistBinding):RecyclerView.ViewHolder(binding.root){
+    inner class PlaylistsViewHolder(private val binding: ItemPlaylistBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("SetTextI18n")
-        fun toBind(item: PlaylistsModel.Item){
+        fun toBind(item: PlaylistsModel.Item) {
             binding.tvPlaylistName.text = item.snippet.title
-            binding.tvPlaylistVideoCount.text = item.contentDetails.itemCount.toString() + " video series"
+            binding.tvPlaylistVideoCount.text =
+                item.contentDetails.itemCount.toString() + " video series"
             binding.imgVideo.load(item.snippet.thumbnails.default.url)
         }
     }

@@ -1,7 +1,7 @@
 package com.example.youtube57.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.youtube57.R
 import com.example.youtube57.core.network.RetrofitClient
 import com.example.youtube57.domain.repository.Repository

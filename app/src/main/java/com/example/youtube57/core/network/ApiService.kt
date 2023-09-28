@@ -5,7 +5,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-internal interface ApiService {
+interface ApiService {
 
     @GET("playlists")
     fun getPlaylists(
@@ -13,5 +13,5 @@ internal interface ApiService {
         @Query("key") apiKey: String,
         @Query("channelId") channelId: String,
         @Query("maxResults") maxResults: Int
-    ):Call<PlaylistsModel>
+    ): Call<PlaylistsModel>
 }
