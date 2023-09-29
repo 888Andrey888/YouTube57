@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.youtube57.core.base.BaseFragment
+import com.example.youtube57.core.utils.Status
 import com.example.youtube57.databinding.FragmentPlaylistsBinding
 import com.example.youtube57.presentation.MainActivity
 import com.example.youtube57.utils.PlayListViewModelFactory
-import com.example.youtube57.core.utils.Status
 
 internal class PlaylistsFragment : BaseFragment<FragmentPlaylistsBinding, PlaylistsViewModel>() {
 

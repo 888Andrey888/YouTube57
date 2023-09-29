@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.example.youtube57.R
+import com.example.youtube57.presentation.noconnection.NoConnectionFragment
 
 
 abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {

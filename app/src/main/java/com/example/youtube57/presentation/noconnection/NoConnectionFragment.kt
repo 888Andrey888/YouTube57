@@ -3,6 +3,7 @@ package com.example.youtube57.presentation.noconnection
 import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.youtube57.R
 import com.example.youtube57.databinding.FragmentNoConnectionBinding
+import com.example.youtube57.presentation.MainActivity
 
 class NoConnectionFragment : Fragment() {
 
@@ -34,7 +36,7 @@ class NoConnectionFragment : Fragment() {
             requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val connectionInfo = cm.activeNetwork
         if (connectionInfo != null) {
-            findNavController().navigate(R.id.playlistsFragment)
+            findNavController().navigateUp()
         }
     }
 }
