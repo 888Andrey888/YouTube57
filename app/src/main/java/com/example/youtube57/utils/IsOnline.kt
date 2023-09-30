@@ -7,7 +7,7 @@ import android.net.Network
 import android.net.NetworkInfo
 import androidx.lifecycle.LiveData
 
-class IsOnline(private val context: Context) : LiveData<Boolean>() {
+class IsOnline(context: Context) : LiveData<Boolean>() {
 
     private var connectivityManager: ConnectivityManager =
         context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
