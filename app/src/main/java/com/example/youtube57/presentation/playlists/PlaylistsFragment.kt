@@ -4,27 +4,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.youtube57.R
 import com.example.youtube57.core.base.BaseFragment
 import com.example.youtube57.core.utils.Status
 import com.example.youtube57.databinding.FragmentPlaylistsBinding
 import com.example.youtube57.presentation.MainActivity
-import com.example.youtube57.utils.PlayListViewModelFactory
+import com.example.youtube57.utils.IsOnline
 
-internal class PlaylistsFragment : BaseFragment<FragmentPlaylistsBinding, PlaylistsViewModel>() {
+internal class PlaylistsFragment : BaseFragment<FragmentPlaylistsBinding>() {
 
     private val adapter = PlaylistsAdapter()
-    private val factory = PlayListViewModelFactory(MainActivity.repository)
-    override val viewModel: PlaylistsViewModel
-        get() = ViewModelProvider(this, factory)[PlaylistsViewModel::class.java]
+    private val playlistsViewModel = PlaylistsViewModel(MainActivity.repository)
 
     override fun inflaterViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
     ) = FragmentPlaylistsBinding.inflate(inflater, container, false)
 
+    override fun checkConnection() {
+        IsOnline(requireContext()).observe(viewLifecycleOwner) {
+            if (!it)
+                findNavController().navigate(R.id.noConnectionFragment)
+        }
+    }
+
     override fun initRecycler() {
-        viewModel.getPlaylists().observe(viewLifecycleOwner) { resource ->
+        playlistsViewModel.getPlaylists().observe(viewLifecycleOwner) { resource ->
             when (resource.status) {
                 Status.SUCCESS -> {
                     binding.progressBar.visibility = View.GONE
