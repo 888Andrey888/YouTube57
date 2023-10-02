@@ -12,10 +12,11 @@ import com.example.youtube57.databinding.FragmentPlaylistsBinding
 import com.example.youtube57.presentation.MainActivity
 import com.example.youtube57.utils.IsOnline
 
-internal class PlaylistsFragment : BaseFragment<FragmentPlaylistsBinding>() {
+internal class PlaylistsFragment : BaseFragment<FragmentPlaylistsBinding, PlaylistsViewModel>() {
 
     private val adapter = PlaylistsAdapter()
-    private val playlistsViewModel = PlaylistsViewModel(MainActivity.repository)
+    override val viewModel: PlaylistsViewModel
+        get() = PlaylistsViewModel(MainActivity.repository)
 
     override fun inflaterViewBinding(
         inflater: LayoutInflater,
@@ -23,14 +24,22 @@ internal class PlaylistsFragment : BaseFragment<FragmentPlaylistsBinding>() {
     ) = FragmentPlaylistsBinding.inflate(inflater, container, false)
 
     override fun checkConnection() {
-        IsOnline(requireContext()).observe(viewLifecycleOwner) {
-            if (!it)
-                findNavController().navigate(R.id.noConnectionFragment)
+        IsOnline(requireContext()).observe(viewLifecycleOwner) {isConnect ->
+            if (!isConnect){
+                binding.rvPlaylists.visibility = View.GONE
+                binding.llInclude.visibility = View.VISIBLE
+            }
+            binding.layoutNoConnection.btnTryAgain.setOnClickListener {
+                if (isConnect){
+                    binding.rvPlaylists.visibility = View.VISIBLE
+                    binding.llInclude.visibility = View.GONE
+                }
+            }
         }
     }
 
     override fun initRecycler() {
-        playlistsViewModel.getPlaylists().observe(viewLifecycleOwner) { resource ->
+        viewModel.getPlaylists().observe(viewLifecycleOwner) { resource ->
             when (resource.status) {
                 Status.SUCCESS -> {
                     binding.progressBar.visibility = View.GONE
