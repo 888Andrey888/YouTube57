@@ -2,6 +2,7 @@ package com.example.youtube57.presentation.playlists
 
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,15 +10,16 @@ import coil.load
 import com.example.youtube57.data.model.PlaylistsModel
 import com.example.youtube57.databinding.ItemPlaylistBinding
 
-internal class PlaylistsAdapter : RecyclerView.Adapter<PlaylistsAdapter.PlaylistsViewHolder>() {
+class PlaylistsAdapter : RecyclerView.Adapter<PlaylistsAdapter.PlaylistsViewHolder>() {
 
     private var _list = mutableListOf<PlaylistsModel.Item>()
-    private val list get() = _list
+    private val list: List<PlaylistsModel.Item> get() = _list
 
     fun addData(playlistModelItem: List<PlaylistsModel.Item>) {
         _list.clear()
         _list.addAll(playlistModelItem)
         notifyItemRangeInserted(_list.size, playlistModelItem.size - _list.size)
+        Log.d("ololo", "addData: $_list")
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistsViewHolder {
@@ -44,7 +46,7 @@ internal class PlaylistsAdapter : RecyclerView.Adapter<PlaylistsAdapter.Playlist
             binding.tvPlaylistName.text = item.snippet.title
             binding.tvPlaylistVideoCount.text =
                 item.contentDetails.itemCount.toString() + " video series"
-            binding.imgVideo.load(item.snippet.thumbnails.default.url)
+            binding.imgPlaylist.load(item.snippet.thumbnails.default.url)
         }
     }
 }

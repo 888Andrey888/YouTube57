@@ -15,4 +15,7 @@
     <dimen name="img_no_connection_height">276dp</dimen>
     <dimen name="large_indentation">32dp</dimen>
     <dimen name="button_radius">4dp</dimen>
+    <dimen name="large_text_size">24sp</dimen>
+    <dimen name="btn_back_text_size">17sp</dimen>
+    <dimen name="tb_title_text_size">20sp</dimen>
 </resources>

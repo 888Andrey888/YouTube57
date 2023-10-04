@@ -30,6 +30,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
         checkConnection()
         initRecycler()
     }
@@ -37,6 +38,8 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {
     abstract fun checkConnection()
 
     abstract fun initRecycler()
+
+    abstract fun initView()
 
     override fun onDestroy() {
         super.onDestroy()

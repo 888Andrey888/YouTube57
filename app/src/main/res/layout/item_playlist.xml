@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/container_img_video"
+        android:id="@+id/container_img_playlist"
         android:layout_width="@dimen/cardview_width"
         android:layout_height="@dimen/cardview_height"
         android:layout_marginStart="@dimen/default_indentation"
@@ -21,7 +21,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/img_video"
+                android:id="@+id/img_playlist"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:importantForAccessibility="no"
@@ -71,7 +71,7 @@
         android:textSize="@dimen/default_text_size"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/container_img_video"
+        app:layout_constraintStart_toEndOf="@id/container_img_playlist"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Emotional Well-being Healing Practices for Children" />
 
