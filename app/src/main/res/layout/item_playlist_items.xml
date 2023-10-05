@@ -46,7 +46,7 @@
         tools:text="Emotional Well-being Healing Practices for Children" />
 
     <TextView
-        android:id="@+id/tv_playlist_video_duration"
+        android:id="@+id/tv_video_duration"
         android:layout_width="@dimen/match_constraint"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/default_indentation"

@@ -12,28 +12,11 @@ import kotlinx.coroutines.launch
 
 class PlaylistsViewModel(private val repository: Repository) : BaseViewModel() {
 
-    private val _playlists = MutableLiveData<PlaylistsModel>()
+    private var _playlists = MutableLiveData<PlaylistsModel>()
     val playlists: LiveData<PlaylistsModel> get() = _playlists
 
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String> get() = _error
-
-    fun getPlaylists() {
-        viewModelScope.launch {
-            val result = repository.getPlaylists()
-            when {
-                result.isSuccess -> {
-                    result.onSuccess {
-                        _playlists.postValue(it)
-                    }
-                }
-
-                result.isFailure -> {
-                    result.onFailure {
-                        _error.postValue(it.message)
-                    }
-                }
-            }
-        }
-    }
+    fun getPlaylists() = doOperation(
+        operation = { repository.getPlaylists() },
+        success = { _playlists.postValue(it) }
+    )
 }

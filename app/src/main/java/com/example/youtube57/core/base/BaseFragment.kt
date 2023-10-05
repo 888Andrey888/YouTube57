@@ -10,9 +10,9 @@ import androidx.viewbinding.ViewBinding
 
 abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {
 
-    protected var _binding: VB? = null
+    private var _binding: VB? = null
     protected val binding get() = _binding!!
-    protected abstract val viewModel : VM
+//    protected abstract val viewModel : VM
 
     protected abstract fun inflaterViewBinding(
         inflater: LayoutInflater,
@@ -27,19 +27,6 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {
         _binding = inflaterViewBinding(inflater, container)
         return binding.root
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initView()
-        checkConnection()
-        initRecycler()
-    }
-
-    abstract fun checkConnection()
-
-    abstract fun initRecycler()
-
-    abstract fun initView()
 
     override fun onDestroy() {
         super.onDestroy()

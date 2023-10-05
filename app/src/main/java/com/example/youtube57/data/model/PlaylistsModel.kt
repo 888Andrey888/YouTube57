@@ -1,5 +1,7 @@
 package com.example.youtube57.data.model
 
+import java.io.Serializable
+
 data class PlaylistsModel(
     val etag: String,
     val items: List<Item>,
@@ -13,7 +15,7 @@ data class PlaylistsModel(
         val id: String,
         val kind: String,
         val snippet: Snippet
-    ) {
+    ): Serializable {
         data class ContentDetails(
             val itemCount: Int
         )
