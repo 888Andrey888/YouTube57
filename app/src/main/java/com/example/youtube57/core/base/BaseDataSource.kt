@@ -11,7 +11,7 @@ abstract class BaseDataSource {
 
                 if (body != null || response.code() in 200..299) {
                     Result.success(body!!)
-                }else{
+                } else {
                     Result.failure(Throwable(response.message()))
                 }
 

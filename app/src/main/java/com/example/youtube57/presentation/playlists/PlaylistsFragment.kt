@@ -1,6 +1,5 @@
 package com.example.youtube57.presentation.playlists
 
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -36,24 +35,21 @@ class PlaylistsFragment : BaseFragment<FragmentPlaylistsBinding, PlaylistsViewMo
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel.playlists.observe(viewLifecycleOwner){
-            adapter.addData(it.items)
-        }
-    }
-
     override fun initRecycler() {
         //binding.progressBar.visibility = View.GONE
-
-        /*viewModel.playlists.observe(viewLifecycleOwner) {
+        viewModel.playlists.observe(viewLifecycleOwner) {
             Log.d("ololo", "initRecycler: ok")
             adapter.addData(it.items)
-        }*/
+        }
         binding.rvPlaylists.adapter = adapter
     }
 
     override fun initView() {
         viewModel.getPlaylists()
+
+        viewModel.playlists.observe(viewLifecycleOwner) {
+            Log.d("ololo", "initRecycler: ok")
+            adapter.addData(it.items)
+        }
     }
 }
