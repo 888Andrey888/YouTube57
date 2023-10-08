@@ -6,25 +6,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
+import com.example.youtube57.R
 import com.example.youtube57.core.base.BaseFragment
 import com.example.youtube57.data.model.PlaylistsModel
 import com.example.youtube57.databinding.FragmentPlaylistItemsBinding
 import com.example.youtube57.presentation.MainActivity
 import com.example.youtube57.utils.Constants
 import com.example.youtube57.utils.IsOnline
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PlaylistItemsFragment : BaseFragment<FragmentPlaylistItemsBinding, PlaylistItemsViewModel>() {
 
-    private val adapter = PlaylistItemsAdapter()
-
-    //    override val viewModel: PlaylistItemsViewModel
-//        get() = PlaylistItemsViewModel(MainActivity.repository)
-    private val viewModel = PlaylistItemsViewModel(MainActivity.repository)
+    private val adapter = PlaylistItemsAdapter(this::onClickItem)
     private val isOnline: IsOnline by lazy {
         IsOnline(requireContext())
     }
+    override val viewModel: PlaylistItemsViewModel by viewModel()
 
     override fun inflaterViewBinding(
         inflater: LayoutInflater,
@@ -98,6 +99,14 @@ class PlaylistItemsFragment : BaseFragment<FragmentPlaylistItemsBinding, Playlis
         binding.layoutToolbarItems.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
+    }
+
+    private fun onClickItem(playlistItem: PlaylistsModel.Item) {
+        setFragmentResult(
+            Constants.REQUIRES_GO_TO_VIDEO_FRAGMENT,
+            bundleOf(Constants.REQUIRES_SET_ITEM_TO_VIDEO_FRAGMENT to playlistItem)
+        )
+        findNavController().navigate(R.id.videoFragment)
     }
 
 }

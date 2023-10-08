@@ -15,8 +15,9 @@ data class PlaylistsModel(
         val id: String,
         val kind: String,
         val snippet: Snippet
-    ): Serializable {
+    ) : Serializable {
         data class ContentDetails(
+            val videoId: String,
             val itemCount: Int
         )
 

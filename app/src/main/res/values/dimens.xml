@@ -18,4 +18,8 @@
     <dimen name="large_text_size">24sp</dimen>
     <dimen name="btn_back_text_size">17sp</dimen>
     <dimen name="tb_title_text_size">20sp</dimen>
+    <dimen name="indentation_24dp">24dp</dimen>
+    <dimen name="text_size_20sp">20sp</dimen>
+    <dimen name="text_size_16sp">16sp</dimen>
+    <dimen name="indentation_10dp">10dp</dimen>
 </resources>

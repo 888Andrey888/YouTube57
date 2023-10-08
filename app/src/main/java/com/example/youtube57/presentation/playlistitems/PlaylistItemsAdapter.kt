@@ -8,7 +8,8 @@ import com.example.youtube57.data.model.PlaylistsModel
 import com.example.youtube57.databinding.ItemPlaylistBinding
 import com.example.youtube57.databinding.ItemPlaylistItemsBinding
 
-class PlaylistItemsAdapter : RecyclerView.Adapter<PlaylistItemsAdapter.PlaylistItemsViewHolder>() {
+class PlaylistItemsAdapter(private val onClickItem: (playlistItem: PlaylistsModel.Item) -> Unit) :
+    RecyclerView.Adapter<PlaylistItemsAdapter.PlaylistItemsViewHolder>() {
 
     private var _list = mutableListOf<PlaylistsModel.Item>()
     private val list: List<PlaylistsModel.Item> get() = _list
@@ -39,6 +40,7 @@ class PlaylistItemsAdapter : RecyclerView.Adapter<PlaylistItemsAdapter.PlaylistI
         fun bind(item: PlaylistsModel.Item) {
             binding.tvVideoName.text = item.snippet.title
             binding.imgVideo.load(item.snippet.thumbnails.default.url)
+            itemView.setOnClickListener { onClickItem(item) }
         }
 
     }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/small_indentation"
+    app:cardCornerRadius="@dimen/small_indentation">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/small_indentation"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/cb_1080"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/_1080p"
+
+                android:textSize="@dimen/default_text_size" />
+
+            <RadioButton
+                android:id="@+id/cb_720"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/_720p"
+                android:textSize="@dimen/default_text_size" />
+
+            <RadioButton
+                android:id="@+id/cb_480"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/_480p"
+                android:textSize="@dimen/default_text_size" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btn_alert_dialog_dowload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Base.Button"
+            android:text="@string/download"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

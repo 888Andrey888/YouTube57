@@ -109,6 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/default_indentation"
                 android:backgroundTint="@color/orange"
+                app:borderWidth="0dp"
                 android:src="@drawable/ic_play"
                 app:layout_anchor="@id/main_appbar"
                 app:layout_anchorGravity="bottom|right|end" />

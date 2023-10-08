@@ -12,7 +12,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {
 
     private var _binding: VB? = null
     protected val binding get() = _binding!!
-//    protected abstract val viewModel : VM
+    protected abstract val viewModel : VM
 
     protected abstract fun inflaterViewBinding(
         inflater: LayoutInflater,

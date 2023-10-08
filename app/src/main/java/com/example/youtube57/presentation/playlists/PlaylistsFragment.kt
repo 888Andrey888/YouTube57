@@ -12,20 +12,17 @@ import com.example.youtube57.R
 import com.example.youtube57.core.base.BaseFragment
 import com.example.youtube57.data.model.PlaylistsModel
 import com.example.youtube57.databinding.FragmentPlaylistsBinding
-import com.example.youtube57.presentation.MainActivity
 import com.example.youtube57.utils.Constants
 import com.example.youtube57.utils.IsOnline
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PlaylistsFragment : BaseFragment<FragmentPlaylistsBinding, PlaylistsViewModel>() {
 
     private val adapter = PlaylistsAdapter(this::onClickItem)
-
-    //    override val viewModel: PlaylistsViewModel
-//        get() = PlaylistsViewModel(MainActivity.repository)
-    private val viewModel = PlaylistsViewModel(MainActivity.repository)
     private val isOnline: IsOnline by lazy {
         IsOnline(requireContext())
     }
+    override val viewModel: PlaylistsViewModel by viewModel()
 
     override fun inflaterViewBinding(
         inflater: LayoutInflater,
