@@ -1,20 +1,18 @@
 package com.example.youtube57.presentation.video
 
 import android.app.AlertDialog
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
-import coil.load
 import com.example.youtube57.R
 import com.example.youtube57.core.base.BaseFragment
 import com.example.youtube57.data.model.PlaylistsModel
 import com.example.youtube57.databinding.FragmentVideoBinding
-import com.example.youtube57.utils.Constants
 import com.example.youtube57.utils.IsOnline
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class VideoFragment : BaseFragment<FragmentVideoBinding, VideoViewModel>() {
@@ -29,15 +27,16 @@ class VideoFragment : BaseFragment<FragmentVideoBinding, VideoViewModel>() {
         container: ViewGroup?
     ) = FragmentVideoBinding.inflate(inflater, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initResultListener()
-        checkConnection()
-        initLiveData()
-        initListener()
+    override fun initView() {
+        arguments?.let {
+            val playlistVideo: PlaylistsModel.Item =
+                VideoFragmentArgs.fromBundle(it).playlistVideo
+            viewModel.getVideo(playlistVideo.contentDetails.videoId!!)
+        }
+
     }
 
-    private fun initListener() {
+    override fun initListener() {
         binding.layoutToolbarItems.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
@@ -51,21 +50,7 @@ class VideoFragment : BaseFragment<FragmentVideoBinding, VideoViewModel>() {
         alertDialog.setView(R.layout.layout_download).show()
     }
 
-    private fun initResultListener() {
-        setFragmentResultListener(Constants.REQUIRES_GO_TO_VIDEO_FRAGMENT) { _, bundle ->
-            bundle.getSerializable(Constants.REQUIRES_SET_ITEM_TO_VIDEO_FRAGMENT)
-                ?.let { item ->
-                    val _item = item as PlaylistsModel.Item
-                    initView(_item.contentDetails.videoId)
-                }
-        }
-    }
-
-    private fun initView(videoId: String) {
-        viewModel.getVideo(videoId)
-    }
-
-    private fun initLiveData() {
+    override fun initLiveData() {
         viewModel.video.observe(viewLifecycleOwner) { item ->
             setView(item.items)
         }
@@ -83,12 +68,21 @@ class VideoFragment : BaseFragment<FragmentVideoBinding, VideoViewModel>() {
     }
 
     private fun setView(items: List<PlaylistsModel.Item>) {
+        lifecycle.addObserver(binding.utpvVideo)
+
         binding.tvTitle.text = items.first().snippet.title
         binding.tvDescription.text = items.first().snippet.description
-        binding.imgVideo.load(items.first().snippet.thumbnails.standard.url)
+
+        binding.utpvVideo.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                super.onReady(youTubePlayer)
+                youTubePlayer.loadVideo(items.first().id, 0f)
+            }
+        })
+
     }
 
-    private fun checkConnection() {
+    override fun checkConnection() {
         isOnline.observe(viewLifecycleOwner) { isConnect ->
             if (!isConnect) {
                 binding.llMainContent.visibility = View.GONE

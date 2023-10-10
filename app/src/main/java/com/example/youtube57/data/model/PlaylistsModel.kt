@@ -8,7 +8,7 @@ data class PlaylistsModel(
     val kind: String,
     val nextPageToken: String,
     val pageInfo: PageInfo
-) {
+){
     data class Item(
         val contentDetails: ContentDetails,
         val etag: String,
@@ -17,15 +17,15 @@ data class PlaylistsModel(
         val snippet: Snippet
     ) : Serializable {
         data class ContentDetails(
-            val videoId: String,
+            val videoId: String?,
             val itemCount: Int
-        )
+        ):Serializable
 
         data class Snippet(
             val channelId: String,
             val channelTitle: String,
             val description: String,
-            val localized: Localized,
+            val localized: Localized?,
             val publishedAt: String,
             val thumbnails: Thumbnails,
             val title: String

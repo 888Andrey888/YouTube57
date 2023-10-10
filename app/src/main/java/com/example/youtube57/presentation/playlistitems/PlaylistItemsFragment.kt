@@ -1,21 +1,14 @@
 package com.example.youtube57.presentation.playlistitems
 
 import android.annotation.SuppressLint
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
-import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
-import com.example.youtube57.R
 import com.example.youtube57.core.base.BaseFragment
 import com.example.youtube57.data.model.PlaylistsModel
 import com.example.youtube57.databinding.FragmentPlaylistItemsBinding
-import com.example.youtube57.presentation.MainActivity
-import com.example.youtube57.utils.Constants
 import com.example.youtube57.utils.IsOnline
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -32,18 +25,21 @@ class PlaylistItemsFragment : BaseFragment<FragmentPlaylistItemsBinding, Playlis
         container: ViewGroup?
     ) = FragmentPlaylistItemsBinding.inflate(inflater, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initResultListener()
-        checkConnection()
-        initLiveData()
+    override fun initListener() {
+//        TODO("Not yet implemented")
     }
 
-    private fun initView(playlistId: String) {
-        viewModel.getPlaylistItems(playlistId)
+    override fun initView() {
+        arguments?.let {
+            val playlistItem: PlaylistsModel.Item =
+                PlaylistItemsFragmentArgs.fromBundle(it).playlistItem
+            viewModel.getPlaylistItems(playlistItem.id)
+            initCoordinator(playlistItem)
+        }
+
     }
 
-    private fun initLiveData() {
+    override fun initLiveData() {
         viewModel.playlistItems.observe(viewLifecycleOwner) { list ->
             initRecycler(list.items)
         }
@@ -65,7 +61,7 @@ class PlaylistItemsFragment : BaseFragment<FragmentPlaylistItemsBinding, Playlis
         binding.rvPlaylistItems.adapter = adapter
     }
 
-    private fun checkConnection() {
+    override fun checkConnection() {
         isOnline.observe(viewLifecycleOwner) { isConnect ->
             if (!isConnect) {
                 binding.llContainerPlaylistItems.visibility = View.GONE
@@ -80,33 +76,22 @@ class PlaylistItemsFragment : BaseFragment<FragmentPlaylistItemsBinding, Playlis
         }
     }
 
-    private fun initResultListener() {
-        setFragmentResultListener(Constants.REQUIRES_GO_TO_PLAYLIST_ITEMS_FRAGMENT) { _, bundle ->
-            bundle.getSerializable(Constants.REQUIRES_SET_ITEM_TO_PLAYLIST_ITEMS_FRAGMENT)
-                ?.let { item ->
-                    val _item = item as PlaylistsModel.Item
-                    initCoordinator(_item)
-                    initView(_item.id)
-                }
-        }
-    }
-
     @SuppressLint("SetTextI18n")
     private fun initCoordinator(item: PlaylistsModel.Item) {
         binding.tvTitle.text = item.snippet.title
         binding.tvDescription.text = item.snippet.description
-        binding.tvVideosCount.text = item.contentDetails.itemCount.toString() + " video series"
+        binding.tvVideosCount.text = "${item.contentDetails.itemCount} video series"
         binding.layoutToolbarItems.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
     }
 
     private fun onClickItem(playlistItem: PlaylistsModel.Item) {
-        setFragmentResult(
-            Constants.REQUIRES_GO_TO_VIDEO_FRAGMENT,
-            bundleOf(Constants.REQUIRES_SET_ITEM_TO_VIDEO_FRAGMENT to playlistItem)
+        findNavController().navigate(
+            PlaylistItemsFragmentDirections.actionPlaylistItemsFragmentToVideoFragment(
+                playlistItem
+            )
         )
-        findNavController().navigate(R.id.videoFragment)
     }
 
 }

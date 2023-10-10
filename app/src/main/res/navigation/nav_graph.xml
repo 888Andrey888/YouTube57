@@ -9,15 +9,39 @@
         android:id="@+id/playlistsFragment"
         android:name="com.example.youtube57.presentation.playlists.PlaylistsFragment"
         android:label="fragment_playlists"
-        tools:layout="@layout/fragment_playlists" />
+        tools:layout="@layout/fragment_playlists" >
+
+        <action
+            android:id="@+id/action_playlistsFragment_to_playlistItemsFragment"
+            app:destination="@id/playlistItemsFragment" />
+
+    </fragment>
+
     <fragment
         android:id="@+id/playlistItemsFragment"
         android:name="com.example.youtube57.presentation.playlistitems.PlaylistItemsFragment"
         android:label="fragment_playlist_items"
-        tools:layout="@layout/fragment_playlist_items" />
+        tools:layout="@layout/fragment_playlist_items" >
+
+        <argument
+            android:name="playlistItem"
+            app:argType="com.example.youtube57.data.model.PlaylistsModel$Item" />
+
+        <action
+            android:id="@+id/action_playlistItemsFragment_to_videoFragment"
+            app:destination="@id/videoFragment" />
+
+    </fragment>
+
     <fragment
         android:id="@+id/videoFragment"
         android:name="com.example.youtube57.presentation.video.VideoFragment"
         android:label="fragment_video"
-        tools:layout="@layout/fragment_video" />
+        tools:layout="@layout/fragment_video">
+
+        <argument
+            android:name="playlistVideo"
+            app:argType="com.example.youtube57.data.model.PlaylistsModel$Item"/>
+
+    </fragment>
 </navigation>
