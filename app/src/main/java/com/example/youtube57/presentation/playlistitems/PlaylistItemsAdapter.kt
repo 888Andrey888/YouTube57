@@ -35,8 +35,13 @@ class PlaylistItemsAdapter(
 
         fun bind(item: PlaylistsModel.Item) {
             binding.tvVideoName.text = item.snippet.title
-            if (!item.snippet.thumbnails.default.url.isNullOrEmpty())
+
+            try {
                 binding.imgVideo.load(item.snippet.thumbnails.default.url)
+            }catch (e: Exception){
+
+            }
+
             itemView.setOnClickListener { onClickItem(item) }
         }
 
