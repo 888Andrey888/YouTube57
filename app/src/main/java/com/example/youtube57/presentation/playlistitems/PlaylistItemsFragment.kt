@@ -9,12 +9,15 @@ import androidx.navigation.fragment.findNavController
 import com.example.youtube57.core.base.BaseFragment
 import com.example.youtube57.data.model.PlaylistsModel
 import com.example.youtube57.databinding.FragmentPlaylistItemsBinding
+import com.example.youtube57.presentation.playlists.pagingloadstate.PlaylistsLoadStateAdapter
 import com.example.youtube57.utils.IsOnline
+import com.example.youtube57.utils.PlaylistsModelComparator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PlaylistItemsFragment : BaseFragment<FragmentPlaylistItemsBinding, PlaylistItemsViewModel>() {
 
-    private val adapter = PlaylistItemsAdapter(this::onClickItem)
+    private val adapter = PlaylistItemsAdapter(PlaylistsModelComparator, this::onClickItem)
+    private var playlistId: String = ""
     private val isOnline: IsOnline by lazy {
         IsOnline(requireContext())
     }
@@ -33,15 +36,15 @@ class PlaylistItemsFragment : BaseFragment<FragmentPlaylistItemsBinding, Playlis
         arguments?.let {
             val playlistItem: PlaylistsModel.Item =
                 PlaylistItemsFragmentArgs.fromBundle(it).playlistItem
-            viewModel.getPlaylistItems(playlistItem.id)
+            playlistId = playlistItem.id
             initCoordinator(playlistItem)
         }
-
+        binding.rvPlaylistItems.adapter = adapter
     }
 
     override fun initLiveData() {
-        viewModel.playlistItems.observe(viewLifecycleOwner) { list ->
-            initRecycler(list.items)
+        viewModel.getPagingPlaylistItems(playlistId).observe(viewLifecycleOwner) { list ->
+            adapter.submitData(lifecycle = lifecycle, list)
         }
 
         viewModel.loading.observe(viewLifecycleOwner) { loading ->
@@ -54,11 +57,6 @@ class PlaylistItemsFragment : BaseFragment<FragmentPlaylistItemsBinding, Playlis
         viewModel.error.observe(viewLifecycleOwner) { error ->
             Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun initRecycler(items: List<PlaylistsModel.Item>) {
-        adapter.addData(items)
-        binding.rvPlaylistItems.adapter = adapter
     }
 
     override fun checkConnection() {

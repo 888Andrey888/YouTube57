@@ -4,16 +4,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.example.youtube57.core.base.BaseFragment
 import com.example.youtube57.data.model.PlaylistsModel
 import com.example.youtube57.databinding.FragmentPlaylistsBinding
+import com.example.youtube57.presentation.playlists.pagingloadstate.PlaylistsLoadStateAdapter
 import com.example.youtube57.utils.IsOnline
+import com.example.youtube57.utils.PlaylistsModelComparator
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PlaylistsFragment : BaseFragment<FragmentPlaylistsBinding, PlaylistsViewModel>() {
 
-    private val adapter = PlaylistsAdapter(this::onClickItem)
+    private val adapter = PlaylistsAdapter(PlaylistsModelComparator, this::onClickItem)
     private val isOnline: IsOnline by lazy {
         IsOnline(requireContext())
     }
@@ -29,8 +34,15 @@ class PlaylistsFragment : BaseFragment<FragmentPlaylistsBinding, PlaylistsViewMo
     }
 
     override fun initLiveData() {
-        viewModel.playlists.observe(viewLifecycleOwner) { list ->
-            initRecycler(list.items)
+        viewModel.getPagingPlaylists().observe(viewLifecycleOwner) { list ->
+            viewModel.viewModelScope.launch(Dispatchers.IO) {
+//                работает без них
+//                adapter.withLoadStateHeaderAndFooter(
+//                    header = PlaylistsLoadStateAdapter(),
+//                    footer = PlaylistsLoadStateAdapter()
+//                )
+                adapter.submitData(lifecycle = lifecycle, list)
+            }
         }
 
         viewModel.loading.observe(viewLifecycleOwner) { loading ->
@@ -60,13 +72,8 @@ class PlaylistsFragment : BaseFragment<FragmentPlaylistsBinding, PlaylistsViewMo
         }
     }
 
-    private fun initRecycler(items: List<PlaylistsModel.Item>) {
-        adapter.addData(items)
-        binding.rvPlaylists.adapter = adapter
-    }
-
     override fun initView() {
-        viewModel.getPlaylists()
+        binding.rvPlaylists.adapter = adapter
     }
 
     private fun onClickItem(playlistItem: PlaylistsModel.Item) {
